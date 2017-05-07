@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		function checkForm() {
+			if(document.form1.username.value == ""){
+				alert("不能为空");
+				return false;
+			}else{
+				alert("通过验证");
+				return true;
+			}
+		}
+
+		window.onload =function () {
+			var formObj = document.form1;
+			formObj.method = "post";
+			formObj.action = "www.baidu.com";
+			formObj.username.onblur = function () {
+				console.log("blur")
+			};
+			formObj.username.onfocus = function () {
+				console.log("focus")
+			}
+		}
+	</script>
+</head>
+<body>
+<form name="form1" onsubmit="return checkForm()">
+	用户名：<input type="text" name="username"/>
+	密码：<input type="password" name="userpwd"/>
+	<input type="submit" value="提交表单">
+</form>
+
+</body>
+</html>

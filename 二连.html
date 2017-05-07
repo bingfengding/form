@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#province{
+			width:120px;
+		}
+		#city{
+			width: 130px;
+		}
+	</style>
+
+</head>
+<body>
+	<dl>
+		<dt>所在地区：</dt>
+		<dd>
+			<select id="province" onChange="changeCity()"><option>请输入省份</option></select>
+
+		</dd>
+		<dd><select id="city">
+			<option>请输入城市</option>
+			</select>
+
+		</dd>
+	</dl>
+	<script>
+		var cityList=new Array();
+		cityList["北京市"] = ["朝阳区","东城区","西城区","海定区"];
+		cityList["上海市"] = ["宝山区","黄浦区","虹口区"];
+		cityList["广东省"] = ["东莞市","珠海市","广州市"];
+		cityList["重庆市"] = ["沙坪坝","渝北区","九龙坡区","渝中区"];
+		cityList["山东省"] = ["济南市","烟岛市","青岛市"];
+		cityList["海南省"] = ["海口市"];
+		cityList["广西省"] = ["南宁市","柳州市"];
+		cityList["浙江省"] = ["杭州市","宁波市","温州市"];
+			function changeCity() {
+				var province= document.getElementById("province").value;
+				var city = document.getElementById("city");
+				city.options.length=0;
+				var firstCld = document.getElementById("province").options[0];
+				if(firstCld.value=="请输入省份"){
+					document.getElementById("province").removeChild(firstCld);
+					console.log("执行")
+				}
+				for(var i in cityList){
+					if (i == province){
+						for(var j in  cityList[i]){
+							try{
+								city.add(new Option(cityList[i][j],cityList[i][j],null));
+
+							}
+							catch (e){
+								city.add(new Option(cityList[i][j],cityList[i][j]));
+							}
+						}
+					}
+				}
+			}
+		(function () {
+			var getEnumPropertyNames = function (obj) {
+				var props = [];
+				for (prop in obj) {
+					props.push(prop);
+				}
+				return props;
+			};
+			var propertys = getEnumPropertyNames(cityList);
+			console.log(propertys);
+			for(var i in propertys){
+					document.getElementById("province").add(new Option(propertys[i],propertys[i],null));
+			}
+		})();
+	</script>
+</body>
+</html>
